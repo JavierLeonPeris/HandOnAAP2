@@ -1,0 +1,21 @@
+---
+- name: Install Automation Controller
+  hosts: localhost
+  become: true
+  vars_files:
+    - vars/custom_vars.yml
+    - vars/general_vars.yml
+  collections:
+    - redhat_cop.app_utilities
+  roles:
+    - redhat_cop.aap_utilities.aap_setup_download
+    - redhat_cop.aap_utilities.aap_setup_prepare
+    - redhat_cop.aap_utilities.aap_setup_install
+  post_tasks:
+    - name: Remove Inventory from /var/tmp
+      file:
+        name: /var/tmp/inventory
+        state: absent
+
+
+  

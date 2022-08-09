@@ -1,0 +1,53 @@
+---
+aap_setup_down_type: "setup-bundle"
+aap_setup_rhel_version: 8
+domain: "example.com"
+
+aap_setup_prep_inv_nodes:
+  automationcontroller:
+    ansible-ctrl."{{ domain }}"
+  automationhub:
+    auto-hub."{{ domain }}"
+  database:
+  execution_nodes:
+  servicescatalog_workers:
+  sso:
+
+aap_setup_prep_inv_vars:
+  automationcontroller:
+    peers: execution_nodes
+  all:
+    admin_password: "{{ secret_admin_password }}"
+    pg_host: ''
+    pg_port: ''
+
+    pg_database: 'awx'
+    pg_username: 'awx'
+    pg_password: "{{ secret_pg_password }}"
+    pg_sslmode: 'prefer'  # set to 'verify-full' for client-side enforced SSL
+
+    registry_url: 'registry.redhat.io'
+    receptor_listener_port: 27199
+
+    automationhub_admin_password: ''
+
+    automationhub_pg_host: ''
+    automationhub_pg_port: ''
+
+    automationhub_pg_database: 'automationhub'
+    automationhub_pg_username: 'automationhub'
+    automationhub_pg_password: '{{ secret_pg_password }}'
+    automationhub_pg_sslmode: 'prefer'
+
+    automationhub_main_url: 'https://ah.node'
+    automationhub_require_content_approval: False
+    automationhub_enable_unauthenticated_collection_access: True
+
+    automationhub_ssl_validate_certs: False
+
+    sso_console_admin_password: ''
+
+aap_setup_prep_inv_secrets:
+  all:
+    registry_username: '{{ secret_registry_username }}'
+    registry_password: "{{ secret_registry_password }}"
