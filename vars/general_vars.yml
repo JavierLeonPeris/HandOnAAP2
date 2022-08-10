@@ -11,6 +11,7 @@ aap_setup_prep_inv_vars:
   automationcontroller:
     peers: execution_nodes
   all:
+    ansible_become: true
     admin_password: "{{ secret_admin_password }}"
     pg_host: ''
     pg_port: ''
