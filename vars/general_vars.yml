@@ -49,5 +49,5 @@ aap_setup_prep_inv_vars:
 
 aap_setup_prep_inv_secrets:
   all:
-    registry_username: '{{ secret_registry_username }}'
+    registry_username: "{{ secret_registry_username }}"
     registry_password: "{{ secret_registry_password }}"
